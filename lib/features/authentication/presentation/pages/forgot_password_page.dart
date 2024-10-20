@@ -3,6 +3,7 @@ import 'package:chat_app/common/widgets/custom_text_field.dart';
 import 'package:chat_app/common/widgets/text_based_on_theme.dart';
 import 'package:chat_app/constants/string_constants.dart';
 import 'package:chat_app/features/authentication/presentation/widgets/authenticationn_button.dart';
+import 'package:chat_app/main.dart';
 import 'package:flutter/material.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
@@ -30,8 +31,21 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   }
 
   AppBar _buildAppBar() {
+    final bool isDarkMode =
+        Theme.of(context).colorScheme.brightness == Brightness.dark;
     return AppBar(
-      title: const TextBasedOnTheme(text: 'Forgot Password'),
+      leading: IconButton(
+          onPressed: () {
+            navigatorKey.currentState!.pop();
+          },
+          icon: Icon(
+            Icons.arrow_back,
+            color: isDarkMode ? Colors.white : Colors.black,
+          )),
+      title: TextBasedOnTheme(
+        text: 'Forgot Password',
+        textTheme: Theme.of(context).textTheme.titleLarge!,
+      ),
     );
   }
 
@@ -43,9 +57,14 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(forgotPasswordPageMessage, textAlign: TextAlign.center, style: Theme.of(context).textTheme.bodySmall!.copyWith(
-              color: isDarkTheme ? Colors.white : Colors.black
-            ),),
+            Text(
+              forgotPasswordPageMessage,
+              textAlign: TextAlign.center,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodySmall!
+                  .copyWith(color: isDarkTheme ? Colors.white : Colors.black),
+            ),
             SizedBox(height: Utils.getScreenHeight(context) * 0.019),
             _buildEmailField(),
             SizedBox(height: Utils.getScreenHeight(context) * 0.015),
@@ -55,7 +74,6 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       ),
     );
   }
-
 
   Widget _buildEmailField() {
     return CustomTextField(

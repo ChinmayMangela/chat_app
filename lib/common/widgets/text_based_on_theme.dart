@@ -4,11 +4,12 @@ class TextBasedOnTheme extends StatelessWidget {
   const TextBasedOnTheme({
     super.key,
     required this.text,
-    this.isBoldFont,
+    this.isBoldFont, required this.textTheme,
   });
 
   final String text;
   final bool? isBoldFont;
+  final TextStyle textTheme;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class TextBasedOnTheme extends StatelessWidget {
     Color color = isDarkTheme ? Colors.white : Colors.black;
     return Text(
       text,
-      style: Theme.of(context).textTheme.bodySmall!.copyWith(
+      style: textTheme.copyWith(
             color: color,
             fontWeight:
                 isBoldFont == true ? FontWeight.bold : FontWeight.normal,
