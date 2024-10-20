@@ -5,19 +5,20 @@ import 'package:chat_app/features/authentication/presentation/widgets/authentica
 import 'package:chat_app/features/authentication/presentation/widgets/lock_icon.dart';
 import 'package:flutter/material.dart';
 
-class LogInPage extends StatefulWidget {
-  const LogInPage({
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({
     super.key,
-    required this.onSignUpTap,
+    required this.onLoginTap,
   });
 
-  final void Function() onSignUpTap;
+  final void Function() onLoginTap;
 
   @override
-  State<LogInPage> createState() => _LogInPageState();
+  State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _LogInPageState extends State<LogInPage> {
+class _SignUpPageState extends State<SignUpPage> {
+  final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _obscurePassword = true;
@@ -28,21 +29,26 @@ class _LogInPageState extends State<LogInPage> {
     });
   }
 
-  void _logIn() {
+  void _signUp() {
+    final name = _nameController.text.trim();
     final email = _emailController.text.trim();
     final password = _passwordController.text.trim();
 
-    if (email.isEmpty || password.isEmpty) {
+    if (name.length < 5) {
+      Utils.showSnackBar('Length of name must be greater than 5 characters');
+      return;
+    }
+
+    if (name.isEmpty || email.isEmpty || password.isEmpty) {
       Utils.showSnackBar('Enter your credentials');
       return;
     }
   }
 
-  void _onForgotPasswordTapped() {}
-
   @override
   void dispose() {
     super.dispose();
+    _nameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
   }
@@ -77,7 +83,7 @@ class _LogInPageState extends State<LogInPage> {
 
   Widget _buildHeadingText() {
     return Text(
-      logInHeadingText,
+      signUpHeadingText,
       style: Theme.of(context).textTheme.bodyLarge!.copyWith(
             color: Colors.grey,
           ),
@@ -88,16 +94,25 @@ class _LogInPageState extends State<LogInPage> {
     final screenHeight = Utils.getScreenHeight(context);
     return Column(
       children: [
+        _buildNameTextField(),
+        SizedBox(height: screenHeight * 0.015),
         _buildEmailTextField(),
         SizedBox(height: screenHeight * 0.015),
         _buildPasswordField(),
-        SizedBox(height: screenHeight * 0.005),
-        _buildForgotPasswordButton(),
-        SizedBox(height: screenHeight * 0.015),
-        _buildLogInButton(),
+        SizedBox(height: screenHeight * 0.025),
+        _buildSignUpButton(),
         SizedBox(height: screenHeight * 0.02),
         _buildBottomMessage()
       ],
+    );
+  }
+
+  Widget _buildNameTextField() {
+    return CustomTextField(
+      controller: _nameController,
+      hintText: 'Name',
+      isPasswordField: false,
+      obscureText: false,
     );
   }
 
@@ -120,25 +135,10 @@ class _LogInPageState extends State<LogInPage> {
     );
   }
 
-  Widget _buildForgotPasswordButton() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        TextButton(
-          onPressed: _onForgotPasswordTapped,
-          child: const Text('Forgot Password',
-              style: TextStyle(
-                color: Colors.grey,
-              )),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildLogInButton() {
+  Widget _buildSignUpButton() {
     return AuthenticationButton(
-      label: 'Login',
-      onTap: _logIn,
+      label: 'Signup',
+      onTap: _signUp,
     );
   }
 
@@ -149,15 +149,15 @@ class _LogInPageState extends State<LogInPage> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          'Don\'t have an account? ',
+          'Already have an account? ',
           style: theme!.copyWith(
             color: Colors.grey,
           ),
         ),
         TextButton(
-          onPressed: widget.onSignUpTap,
+          onPressed: widget.onLoginTap,
           child: Text(
-            'Register here',
+            'Login here',
             style: theme.copyWith(
                 color: isDarkMode ? Colors.white : Colors.black,
                 fontWeight: FontWeight.bold),

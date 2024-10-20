@@ -1,5 +1,6 @@
 import 'package:chat_app/common/theme/app_theme.dart';
 import 'package:chat_app/features/authentication/presentation/pages/log_in_page.dart';
+import 'package:chat_app/features/authentication/presentation/pages/login_and_signup.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       navigatorKey: navigatorKey,
       theme: lightTheme,
       darkTheme: darkTheme,
-      home: const LogInPage(),
+      home: const LoginAndSignup(),
     );
   }
 }
