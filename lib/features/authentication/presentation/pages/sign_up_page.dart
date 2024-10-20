@@ -34,13 +34,13 @@ class _SignUpPageState extends State<SignUpPage> {
     final email = _emailController.text.trim();
     final password = _passwordController.text.trim();
 
-    if (name.length < 5) {
-      Utils.showSnackBar('Length of name must be greater than 5 characters');
+    if (name.isEmpty || email.isEmpty || password.isEmpty) {
+      Utils.showSnackBar('Enter your credentials');
       return;
     }
 
-    if (name.isEmpty || email.isEmpty || password.isEmpty) {
-      Utils.showSnackBar('Enter your credentials');
+    if (name.length < 5) {
+      Utils.showSnackBar('Length of name must be greater than 5 characters');
       return;
     }
   }

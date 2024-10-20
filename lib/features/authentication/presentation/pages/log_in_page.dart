@@ -3,6 +3,7 @@ import 'package:chat_app/common/widgets/custom_text_field.dart';
 import 'package:chat_app/constants/string_constants.dart';
 import 'package:chat_app/features/authentication/presentation/widgets/authenticationn_button.dart';
 import 'package:chat_app/features/authentication/presentation/widgets/lock_icon.dart';
+import 'package:chat_app/main.dart';
 import 'package:flutter/material.dart';
 
 class LogInPage extends StatefulWidget {
@@ -22,6 +23,7 @@ class _LogInPageState extends State<LogInPage> {
   final _passwordController = TextEditingController();
   bool _obscurePassword = true;
 
+
   void onTogglePasswordState() {
     setState(() {
       _obscurePassword = !_obscurePassword;
@@ -38,7 +40,9 @@ class _LogInPageState extends State<LogInPage> {
     }
   }
 
-  void _onForgotPasswordTapped() {}
+  void _onForgotPasswordTapped() {
+    navigatorKey.currentState!.pushNamed('/forgotPasswordPage');
+  }
 
   @override
   void dispose() {
