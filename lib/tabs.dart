@@ -1,5 +1,17 @@
-import 'package:chat_app/features/authentication/services/authentication_service.dart';
+import 'package:chat_app/common/domain/bottom_nav_bar_item.dart';
+import 'package:chat_app/features/chats/presentation/pages/chats_page.dart';
+import 'package:chat_app/features/profile/presentation/pages/profile_page.dart';
 import 'package:flutter/material.dart';
+
+const List<BottomNavBarItemModel> _tabs = [
+  BottomNavBarItemModel(name: 'Chat', icon: Icons.chat),
+  BottomNavBarItemModel(name: 'Profile', icon: Icons.person),
+];
+
+const List<Widget> _pages = [
+  ChatsPage(),
+  ProfilePage(),
+];
 
 class Tabs extends StatefulWidget {
   const Tabs({super.key});
@@ -9,13 +21,37 @@ class Tabs extends StatefulWidget {
 }
 
 class _TabsState extends State<Tabs> {
+  var _selectedIndex = 0;
+
+  void _changePage(int newIndex) {
+    setState(() {
+      _selectedIndex = newIndex;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: IconButton(onPressed: () {
-          AuthenticationService().signOut();
-        }, icon: Icon(Icons.logout)),
+      body: _pages[_selectedIndex],
+      bottomNavigationBar: _buildBottomNavigationBar(),
+    );
+  }
+
+  Widget _buildBottomNavigationBar() {
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 2),
+      margin: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: isDarkMode ? Colors.white : Colors.black,
+      ),
+      child: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+        onTap: _changePage,
+        items: _tabs.map((tab) {
+          return BottomNavigationBarItem(icon: Icon(tab.icon), label: tab.name);
+        }).toList(),
       ),
     );
   }

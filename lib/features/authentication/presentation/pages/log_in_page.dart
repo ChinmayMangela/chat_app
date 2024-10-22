@@ -2,7 +2,8 @@ import 'package:chat_app/common/utils/utils.dart';
 import 'package:chat_app/common/widgets/custom_text_field.dart';
 import 'package:chat_app/constants/string_constants.dart';
 import 'package:chat_app/features/authentication/presentation/widgets/authenticationn_button.dart';
-import 'package:chat_app/features/authentication/presentation/widgets/lock_icon.dart';
+import 'package:chat_app/features/authentication/presentation/widgets/heading_component.dart';
+import 'package:chat_app/features/authentication/presentation/widgets/sub_heading_component.dart';
 import 'package:chat_app/features/authentication/services/authentication_service.dart';
 import 'package:chat_app/main.dart';
 import 'package:flutter/material.dart';
@@ -67,16 +68,16 @@ class _LogInPageState extends State<LogInPage> {
   Widget _buildBody() {
     final screenHeight = Utils.getScreenHeight(context);
     return Padding(
-      padding: const EdgeInsets.all(19),
+      padding: EdgeInsets.all(screenHeight * 0.018),
       child: Center(
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const LockIcon(),
-              SizedBox(height: screenHeight * 0.07),
-              _buildHeadingText(),
-              SizedBox(height: screenHeight * 0.05),
+              const HeadingComponent(headingText: logInHeadingText),
+              SizedBox(height: screenHeight * 0.02),
+              const SubHeadingComponent(subHeading: logInSubHeadingText),
+              SizedBox(height: screenHeight * 0.06),
               _buildLogInForm(),
             ],
           ),
@@ -85,14 +86,6 @@ class _LogInPageState extends State<LogInPage> {
     );
   }
 
-  Widget _buildHeadingText() {
-    return Text(
-      logInHeadingText,
-      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-            color: Colors.grey,
-          ),
-    );
-  }
 
   Widget _buildLogInForm() {
     final screenHeight = Utils.getScreenHeight(context);

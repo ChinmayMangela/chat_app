@@ -16,7 +16,7 @@ class CustomButton extends StatelessWidget {
         width: Utils.getScreenWidth(context),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
-          color: Theme.of(context).colorScheme.secondary,
+          color: Theme.of(context).colorScheme.secondaryContainer,
         ),
         child: Center(
           child: child,
