@@ -3,6 +3,9 @@ import 'package:chat_app/common/widgets/custom_text_field.dart';
 import 'package:chat_app/constants/string_constants.dart';
 import 'package:chat_app/features/authentication/presentation/widgets/authenticationn_button.dart';
 import 'package:chat_app/features/authentication/presentation/widgets/lock_icon.dart';
+import 'package:chat_app/features/authentication/services/authentication_service.dart';
+import 'package:chat_app/features/authentication/services/user_service.dart';
+import 'package:chat_app/main.dart';
 import 'package:flutter/material.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -18,6 +21,7 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  final _authenticationService = AuthenticationService();
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -29,7 +33,7 @@ class _SignUpPageState extends State<SignUpPage> {
     });
   }
 
-  void _signUp() {
+  void _signUp() async {
     final name = _nameController.text.trim();
     final email = _emailController.text.trim();
     final password = _passwordController.text.trim();
@@ -43,6 +47,16 @@ class _SignUpPageState extends State<SignUpPage> {
       Utils.showSnackBar('Length of name must be greater than 5 characters');
       return;
     }
+
+    Utils.showCircularProgressIndicator(context);
+
+    await _authenticationService.signUpWithEmail(
+      email: email,
+      password: password,
+      name: name,
+    );
+
+    navigatorKey.currentState!.pop();
   }
 
   @override

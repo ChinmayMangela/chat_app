@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 ThemeData lightTheme = ThemeData(
-  scaffoldBackgroundColor: const Color.fromARGB(255, 225, 225, 225),
+  scaffoldBackgroundColor: Colors.white,
   colorScheme: ColorScheme.light(
     brightness: Brightness.light,
-    primary: Colors.white,
-    secondary: Colors.white.withOpacity(0.5),
+    primary: const Color.fromARGB(255, 193, 192, 192),
+    secondary: Colors.grey.shade100,
   ),
   appBarTheme: _getAppBarTheme(false),
   textTheme: GoogleFonts.latoTextTheme(),
