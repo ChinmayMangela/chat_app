@@ -39,20 +39,12 @@ class _TabsState extends State<Tabs> {
 
   Widget _buildBottomNavigationBar() {
     final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 2),
-      margin: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: isDarkMode ? Colors.white : Colors.black,
-      ),
-      child: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        onTap: _changePage,
-        items: _tabs.map((tab) {
-          return BottomNavigationBarItem(icon: Icon(tab.icon), label: tab.name);
-        }).toList(),
-      ),
+    return BottomNavigationBar(
+      currentIndex: _selectedIndex,
+      onTap: _changePage,
+      items: _tabs.map((tab) {
+        return BottomNavigationBarItem(icon: Icon(tab.icon), label: tab.name);
+      }).toList(),
     );
   }
 }
