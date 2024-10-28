@@ -1,5 +1,5 @@
 import 'package:chat_application/common/theme/app_theme.dart';
-import 'package:chat_application/features/authentication/presentation/pages/login_and_signup.dart';
+import 'package:chat_application/features/authentication/presentation/pages/auth_gate.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       routes: {
 
       },
-      home: const LoginAndSignup(),
+      home: const AuthGate(),
     );
   }
 }
