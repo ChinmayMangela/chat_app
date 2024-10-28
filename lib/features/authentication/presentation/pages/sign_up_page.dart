@@ -4,6 +4,7 @@ import 'package:chat_application/constants/string_constants.dart';
 import 'package:chat_application/features/authentication/presentation/widgets/authenticationn_button.dart';
 import 'package:chat_application/features/authentication/presentation/widgets/heading_component.dart';
 import 'package:chat_application/features/authentication/presentation/widgets/sub_heading_component.dart';
+import 'package:chat_application/features/authentication/services/authentication_service.dart';
 import 'package:chat_application/main.dart';
 import 'package:flutter/material.dart';
 
@@ -20,6 +21,7 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  final _authenticationService = AuthenticationService();
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -48,6 +50,13 @@ class _SignUpPageState extends State<SignUpPage> {
 
     Utils.showCircularProgressIndicator(context);
 
+    await _authenticationService.signUpWithEmail(
+      email: email,
+      password: password,
+      name: name,
+    );
+
+    navigatorKey.currentState!.pop();
 
   }
 

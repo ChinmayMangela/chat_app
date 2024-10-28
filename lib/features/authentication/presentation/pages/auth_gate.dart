@@ -1,5 +1,5 @@
+import 'package:chat_application/features/authentication/presentation/pages/email_verification.dart';
 import 'package:chat_application/features/authentication/presentation/pages/login_and_signup.dart';
-import 'package:chat_application/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +14,7 @@ class AuthGate extends StatelessWidget {
       }
 
       if(snapshot.hasData) {
-        return const Home();
+        return const EmailVerificationPage();
       } else {
         return const LoginAndSignup();
       }

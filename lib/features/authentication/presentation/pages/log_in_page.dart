@@ -4,6 +4,7 @@ import 'package:chat_application/constants/string_constants.dart';
 import 'package:chat_application/features/authentication/presentation/widgets/authenticationn_button.dart';
 import 'package:chat_application/features/authentication/presentation/widgets/heading_component.dart';
 import 'package:chat_application/features/authentication/presentation/widgets/sub_heading_component.dart';
+import 'package:chat_application/features/authentication/services/authentication_service.dart';
 import 'package:chat_application/main.dart';
 import 'package:flutter/material.dart';
 
@@ -20,6 +21,7 @@ class LogInPage extends StatefulWidget {
 }
 
 class _LogInPageState extends State<LogInPage> {
+  final _authenticationService = AuthenticationService();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _obscurePassword = true;
@@ -41,12 +43,15 @@ class _LogInPageState extends State<LogInPage> {
     }
 
     Utils.showCircularProgressIndicator(context);
+    await _authenticationService.logInWithEmail(email: email, password: password);
+    navigatorKey.currentState!.pop();
 
   }
 
   void _onForgotPasswordTapped() {
-
+    navigatorKey.currentState!.pushNamed('/forgotPasswordPage');
   }
+
 
   @override
   void dispose() {
