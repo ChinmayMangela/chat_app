@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'package:chat_application/common/widgets/custom_button.dart';
 import 'package:chat_application/features/authentication/services/authentication_service.dart';
+import 'package:chat_application/tabs.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../home.dart';
 
 class EmailVerificationPage extends StatefulWidget {
   const EmailVerificationPage({super.key});
@@ -58,7 +58,7 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
     final bool isDarkMode =
         Theme.of(context).colorScheme.brightness == Brightness.dark;
     return isEmailVerified
-        ? const Home()
+        ? const Tabs()
         : Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(8.0),
