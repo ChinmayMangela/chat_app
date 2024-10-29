@@ -1,12 +1,14 @@
 class Message {
   final String senderId;
   final String receiverId;
+  final String receiverEmail;
   final String content;
   final DateTime timeStamp;
 
   const Message({
     required this.senderId,
     required this.receiverId,
+    required this.receiverEmail,
     required this.content,
     required this.timeStamp,
   });
@@ -15,6 +17,7 @@ class Message {
     return Message(
       senderId: data['senderId'],
       receiverId: data['receiverId'],
+      receiverEmail: data['receiverEmail'],
       content: data['content'],
       timeStamp: DateTime.parse(data['timeStamp']),
     );
@@ -24,6 +27,7 @@ class Message {
     return {
       'senderId': senderId,
       'receiverId': receiverId,
+      'receiverEmail': receiverEmail,
       'content': content,
       'timeStamp': timeStamp.toIso8601String(),
     };
