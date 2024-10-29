@@ -12,7 +12,9 @@ class ProfilePage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(email.toString()),
+          Text(
+            email.toString(),
+          ),
           IconButton(
             onPressed: AuthenticationService().signOut,
             icon: const Icon(Icons.logout),

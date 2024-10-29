@@ -1,4 +1,5 @@
 import 'package:chat_application/features/authentication/domain/end_user.dart';
+import 'package:chat_application/features/chats/presentation/widgets/user_tile.dart';
 import 'package:flutter/material.dart';
 
 class UsersList extends StatelessWidget {
@@ -13,7 +14,8 @@ class UsersList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       itemBuilder: (context, index) {
-        return Text(users[index].email);
+        final currentUser = users[index];
+        return UserTile(user: currentUser);
       },
       itemCount: users.length,
     );

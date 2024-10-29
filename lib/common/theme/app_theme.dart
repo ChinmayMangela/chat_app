@@ -7,6 +7,7 @@ ThemeData theme = ThemeData(
     brightness: Brightness.light,
     primary: Colors.white,
     primaryContainer: Colors.black,
+    secondaryContainer: const Color(0xFFF6F6F6),
     secondary: Colors.grey.shade100,
   ),
   appBarTheme: _getAppBarTheme(false),
