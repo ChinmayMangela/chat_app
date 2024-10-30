@@ -20,7 +20,9 @@ class ChatPage extends StatefulWidget {
 class _ChatPageState extends State<ChatPage> {
   final _messageController = TextEditingController();
 
-  void _sendMessage() {}
+  Future<void> _sendMessage() async {
+
+  }
 
   @override
   void dispose() {
