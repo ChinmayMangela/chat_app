@@ -1,4 +1,6 @@
 import 'package:chat_application/features/authentication/domain/end_user.dart';
+import 'package:chat_application/features/chats/presentation/widgets/profile_name_component.dart';
+import 'package:chat_application/features/chats/presentation/widgets/profile_picture_component.dart';
 import 'package:flutter/material.dart';
 
 class UserTile extends StatelessWidget {
@@ -19,16 +21,10 @@ class UserTile extends StatelessWidget {
         color: Theme.of(context).colorScheme.secondaryContainer,
       ),
       child: ListTile(
-        leading: const CircleAvatar(
-          radius: 25,
-          backgroundImage: AssetImage(
-            'assets/images/default_profile_picture.png',
-          ),
+        leading: const ProfilePictureComponent(),
+        title: ProfileNameComponent(
+          profileName: user.name,
         ),
-        title: Text(user.name, style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-            fontWeight: FontWeight.bold,
-            overflow: TextOverflow.ellipsis
-        ),),
         subtitle: Text('Hello Mansi Patil i love you more than anyone else', style: Theme.of(context).textTheme.bodySmall!.copyWith(
           color: Colors.grey,
           overflow: TextOverflow.ellipsis

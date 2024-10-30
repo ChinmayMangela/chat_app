@@ -2,14 +2,14 @@ import 'package:chat_application/features/authentication/services/user_service.d
 import 'package:chat_application/features/chats/presentation/widgets/users_list.dart';
 import 'package:flutter/material.dart';
 
-class ChatsPage extends StatefulWidget {
-  const ChatsPage({super.key});
+class UserListPage extends StatefulWidget {
+  const UserListPage({super.key});
 
   @override
-  State<ChatsPage> createState() => _ChatsPageState();
+  State<UserListPage> createState() => _UserListPageState();
 }
 
-class _ChatsPageState extends State<ChatsPage> {
+class _UserListPageState extends State<UserListPage> {
   final _userService = UserService();
 
   @override

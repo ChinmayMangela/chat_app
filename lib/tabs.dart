@@ -1,5 +1,5 @@
 import 'package:chat_application/common/domain/bottom_nav_bar_item.dart';
-import 'package:chat_application/features/chats/presentation/pages/chats_page.dart';
+import 'package:chat_application/features/chats/presentation/pages/users_list_page.dart';
 import 'package:chat_application/features/profile/presentation/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +9,7 @@ const List<BottomNavBarItemModel> _tabs = [
 ];
 
 const List<Widget> _pages = [
-  ChatsPage(),
+  UserListPage(),
   ProfilePage(),
 ];
 
