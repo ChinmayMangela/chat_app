@@ -33,19 +33,18 @@ class ChatsService {
 
     try {
       await chatRoomsCollection.doc(chatRoomId).collection('messages').add(
-            message.toJson(),
-          );
+        message.toJson(),
+      );
     } on FirebaseException catch (e) {
       Utils.showSnackBar(e.message);
     }
   }
 
-  String _getChatRoomId(String userId1, String userId2) {
-    final List<String> ids = [userId1, userId2];
+  String _getChatRoomId(String senderId, String receiverId) {
+    final List<String> ids = [senderId, receiverId];
     ids.sort();
     return ids.join('_');
   }
-
 
   Stream<List<Message>> fetchMessages(String senderId, String receiverId) {
     final chatRoomId = _getChatRoomId(senderId, receiverId);
@@ -54,11 +53,34 @@ class ChatsService {
         .collection('chat_rooms')
         .doc(chatRoomId)
         .collection('messages')
+        .orderBy('timeStamp', descending: false)
         .snapshots()
         .map((snapshot) {
-      return snapshot.docs.map((message) {
-        return Message.fromJson(message.data(), message.id);
+      return snapshot.docs.map((doc) {
+        return Message.fromJson(doc.data(), doc.id);
       }).toList();
     });
   }
+
+
+  Stream<Message?> fetchLastMessage(
+      String senderId, String receiverId) {
+    final chatRoomId = _getChatRoomId(senderId, receiverId);
+    return _firebaseFireStore
+        .collection('chat_rooms')
+        .doc(chatRoomId)
+        .collection('messages')
+        .orderBy('timestamp', descending: true).limit(1)
+        .snapshots()
+        .map((snapshot) {
+      if (snapshot.docs.isNotEmpty) {
+        final lastMessage = snapshot.docs.first;
+        return Message.fromJson(lastMessage.data(), lastMessage.id);
+      } else {
+        return null;
+      }
+    });
+  }
+
+
 }

@@ -27,7 +27,7 @@ class AuthenticationService {
           email: email, password: password);
       final user =
       EndUser(id: userCredential.user!.uid, name: name, email: email);
-      await _userService.saveUserToFireStore(user);
+      await _userService.saveUserToFireStore(user, userCredential.user!.uid);
     } on FirebaseAuthException catch (e) {
       Utils.showSnackBar(e.message);
     }

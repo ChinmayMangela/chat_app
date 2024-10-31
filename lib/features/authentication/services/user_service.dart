@@ -9,9 +9,11 @@ class UserService {
 
   UserService() : currentUserId = FirebaseAuth.instance.currentUser?.uid ?? '';
 
-  Future<void> saveUserToFireStore(EndUser user) async {
+  Future<void> saveUserToFireStore(EndUser user, String docId) async {
     try {
-      await _firebaseFireStore.collection('users').add(user.toJson());
+      await _firebaseFireStore.collection('users').doc(docId).set(
+        user.toJson(),
+      );
     } on FirebaseException catch (e) {
       Utils.showSnackBar(e.message);
     }

@@ -1,5 +1,6 @@
 import 'package:chat_application/main.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class Utils {
   static double getScreenWidth(BuildContext context) {
@@ -29,5 +30,10 @@ class Utils {
       ..showSnackBar(snackBar);
   }
 
+
+  static String getFormattedTime(DateTime date) {
+    final formatter = DateFormat.jm();
+    return formatter.format(date);
+  }
 
 }
